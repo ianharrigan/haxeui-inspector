@@ -17,7 +17,7 @@
     <haxelib name="haxeui-remoting" />
 
     <haxedef name="haxeui-remoting-server" />
-    
+
     <assets path="assets/css" rename="css" />
     <assets path="assets/ui" rename="ui" />
 </project>

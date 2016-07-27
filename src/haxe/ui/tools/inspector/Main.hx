@@ -20,7 +20,7 @@ class Main {
 
         var main:Component = ComponentMacros.buildComponent("assets/ui/main.xml");
         Screen.instance.addComponent(main);
-        
+
         var result:Label = main.findComponent("result", null, true);
         var scrollview:ScrollView = main.findComponent("clientList", null, true);
         server.onConnected = function(client:Client) {
@@ -35,7 +35,7 @@ class Main {
                    result.text = Util.buildComponentInfo(components[0]);
                 });
             };
-            
+
             scrollview.contents.addComponent(button);
         };
     }
