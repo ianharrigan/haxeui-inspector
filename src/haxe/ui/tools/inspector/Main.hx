@@ -53,6 +53,11 @@ class Main {
 
             scrollview.contents.addComponent(button);
         };
+        
+        server.onDisconnected = function(client:Client) {
+            var button:Button = scrollview.findComponent(client.uuid, Button, true);
+            scrollview.contents.removeComponent(button);
+        };
     }
 
     private static function onEnterFrame(event:Event) {
