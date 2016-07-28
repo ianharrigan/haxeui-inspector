@@ -24,6 +24,7 @@ class Main {
     private static var _main:Component;
     private static var server:Server = new Server();
     private static var _currentClient:Client;
+    private static var _currentUuid:String;
     
     public static function main() {
 
@@ -57,6 +58,11 @@ class Main {
         server.onDisconnected = function(client:Client) {
             var button:Button = scrollview.findComponent(client.uuid, Button, true);
             scrollview.contents.removeComponent(button);
+            
+            if (_currentClient.uuid == client.uuid) {
+                var resultList:ScrollView = _main.findComponent("resultList", null, true);
+                resultList.contents.removeAllComponents();
+            }
         };
     }
 
