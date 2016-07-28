@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<vbox width="100%" style="cursor:pointer;background-color:#FFFFFF;padding:5px;">
+    <script>
+        function toggleProps() {
+            if (props.hidden == true) {
+                props.show();
+            } else {
+                props.hide();
+            }
+        }
+    </script>
+    <hbox id="details" width="100%" style="spacing:10px;" onclick="toggleProps()">
+        <image id="icon" resource="icons/ui-panel.png" style="margin-left: 5px;" />
+        <label id="label" text="temp" width="100%" />
+    </hbox>
+    <vbox id="props" width="100%" style="padding-left:25px;">
+    </vbox>
+</vbox>

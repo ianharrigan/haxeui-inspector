@@ -3,13 +3,16 @@
     <style source="../css/main.css" />
 
     <label text="HaxeUI Inspector" style="horizontal-align: right; font-size:35px; color: #888888;" />
-    <label width="100%" text="Simply add '-D haxeui-remoting' to any haxeui application and it will automatically enable remoting. Once that application starts up it will automatically appear on the inspectors client list. Clicking on it will dump that applications component tree to the right." />
-    <label width="100%" text="Note: this is a very basic application in it current form and will be added to as time goes on. It only only current works on neko currently till the web socket stuff is #if def'd" style="padding-top: 10px;padding-bottom: 10px;" />
     <hbox width="100%" height="100%">
         <scrollview id="clientList" width="200" height="100%">
             <vbox width="100%">
             </vbox>
         </scrollview>
-        <label text="Result will be displayed here\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n" id="result" width="100%" height="100%" style="font-size: 12px;color: #888888" />
+        <vbox width="100%" height="100%">
+            <scrollview id="resultList" width="100%" height="100%">
+                <vbox width="100%" style="spacing:0;padding:0;">
+                </vbox>
+            </scrollview>
+        </vbox>            
     </hbox>
 </vbox>
