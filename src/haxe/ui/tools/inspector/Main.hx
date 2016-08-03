@@ -22,12 +22,13 @@ import openfl.events.Event;
 class Main {
     private static var _currentComponent:ComponentInfo;
     private static var _main:Component;
-    private static var server:Server = new Server();
+    private static var server:Server;
     private static var _currentClient:Client;
     private static var _currentUuid:String;
     
     public static function main() {
-
+        server = new Server();
+        
         Lib.current.stage.addEventListener(Event.ENTER_FRAME, onEnterFrame);
         Toolkit.init();
 
