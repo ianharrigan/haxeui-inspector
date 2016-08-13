@@ -28,6 +28,7 @@ class Main {
     
     public static function main() {
         server = new Server();
+        server.start();
         
         Lib.current.stage.addEventListener(Event.ENTER_FRAME, onEnterFrame);
         Toolkit.init();
