@@ -25,11 +25,11 @@ class Main {
     private static var server:Server;
     private static var _currentClient:Client;
     private static var _currentUuid:String;
-    
+
     public static function main() {
         server = new Server();
         server.start();
-        
+
         Lib.current.stage.addEventListener(Event.ENTER_FRAME, onEnterFrame);
         Toolkit.init();
 
@@ -56,11 +56,11 @@ class Main {
 
             scrollview.contents.addComponent(button);
         };
-        
+
         server.onDisconnected = function(client:Client) {
             var button:Button = scrollview.findComponent(client.uuid, Button, true);
             scrollview.contents.removeComponent(button);
-            
+
             if (_currentClient.uuid == client.uuid) {
                 var resultList:ScrollView = _main.findComponent("resultList", null, true);
                 resultList.contents.removeAllComponents();
@@ -76,7 +76,7 @@ class Main {
             populateResult(resultList, temp);
         }
     }
-    
+
     private static var ICON_MAP:Map<String, String> = [
         "vbox" => "ui-split-panel-vertical.png",
         "label" => "ui-label.png",
@@ -84,13 +84,13 @@ class Main {
         "hbox" => "ui-split-panel.png",
         "button" => "ui-button.png"
     ];
-    
+
     private static function populateResult(resultList:ScrollView, info:ComponentInfo, indent:Int = 0) {
         var box:Box = ComponentMacros.buildComponent("assets/ui/tree-item.xml");
         box.paddingLeft = indent * 20;
-        
+
         var client:Client = _currentClient;
-        
+
         var details:Box = box.findComponent("details", Box, true);
         box.registerEvent(MouseEvent.MOUSE_OVER, function(e) {
             box.backgroundColor = 0xEEEEEE;
@@ -100,7 +100,7 @@ class Main {
             box.backgroundColor = 0xFFFFFF;
             client.makeCall("component.highlight", ["id" => info.id, "highlight" => "false"]);
         });
-        
+
         var props:Component = box.findComponent("props", Component, true);
         props.hide();
         if (info.text != null)                 addProp(props, 'text', '${info.text}');
@@ -110,44 +110,44 @@ class Main {
         if (info.height != null)               addProp(props, 'height', '${info.height}');
         if (info.percentWidth != null)         addProp(props, 'percentWidth', '${info.percentWidth}');
         if (info.percentHeight != null)        addProp(props, 'percentHeight', '${info.percentHeight}');
-        
+
         var label = box.findComponent("label", Label, true);
         var labelString:String = info.className.split(".").pop();
-        
+
         var icon:Image = box.findComponent("icon", Image, true);
         if (ICON_MAP.exists(labelString.toLowerCase())) {
             icon.resource = "icons/" + ICON_MAP.get(labelString.toLowerCase());
         }
-        
+
         if (info.id != null && StringTools.startsWith(info.id, "__") == false) {
             labelString = "#" + info.id + " [" + labelString + "]";
         }
         label.text = labelString;
 
         resultList.addComponent(box);
-        
+
         if (info.children != null) {
             for (child in info.children) {
                 populateResult(resultList, child, indent + 1);
             }
         }
     }
-    
+
     private static function addProp(props:Component, name:String, value:String) {
         var hbox:HBox = new HBox();
         hbox.percentWidth = 100;
-        
+
         var nameLabel:Label = new Label();
         nameLabel.text = " - " + name + ":";
         nameLabel.width = 75;
         hbox.addComponent(nameLabel);
-        
+
         var valueLabel:Label = new Label();
         valueLabel.text = value;
         //valueLabel.percentWidth = 100;
         valueLabel.width = 100;
         hbox.addComponent(valueLabel);
-        
+
         props.addComponent(hbox);
     }
 }
